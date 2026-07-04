@@ -33,7 +33,7 @@
 }
 
 body {
-    overflow: hidden;
+    overflow-x: hidden;
     background: var(--gris);
 }
 
@@ -112,8 +112,8 @@ form {
     color: var(--blanco);
     border: none;
     padding: 20px;
+    width: 90%;
     min-width: 400px;
-    width: 100%;
     box-shadow: var(--sombra);
     font-size: 16px;
     border: 2px solid var(--border);
@@ -257,6 +257,17 @@ strong {
 }
 
 @media screen and (max-width: 768px) {
+    #nombre {
+        min-width: 100px;
+        width: 270px;
+        max-width: 400px;
+    }
+    
+    #boton_texto {
+        font-size: 12px;
+        margin-top: 5px;
+    }
+
     h1 {
         font-size: 20px;
     }
@@ -271,11 +282,11 @@ strong {
     }
     
     .contenedor1 {
-        min-width: 75%;
+        min-width: 70%;
     }
 
     .contenedor2 {
-        min-width: 25%;
+        min-width: 30%;
     }
 
     body {
