@@ -11,6 +11,7 @@
     <title>Buscador De Perfiles</title>
 </head>
 <body>
+    <!-- aqui va el header se usa para senalar contenido inicial de la pagina como navbar, titulo etc-->
     <header>
         <div class="contenedor1">
             <h1>
@@ -20,10 +21,12 @@
         </div>
         <div class="contenedor2">
             <button id="boton_modo">
-                <p id="boton_texto">Modo Claro</p>
+                <div id="circulo"></div>
             </button>
+            <p id="boton_texto">Modo Oscuro</p>
         </div>
     </header>
+    <!-- aqui va el main se utiliza para mostrar el contenido principal de la pagina, acerca de que va -->
     <main>
         <h3>Introduce el nombre del perfil a buscar</h3>
         <form>
@@ -36,8 +39,9 @@
             <img src="assets/img/gear.png" alt="gear" id="gear" class="rotar">
         </div>
         
-        <div id="resultados"></div>
+        <article id="resultados"></article>
     </main>
+    <!--aqui va el footer con informacion como quien desarrollo la página y derechos de autor-->
     <footer>
         <script src="js/app.js"></script>
         <p>Página desarrollada por <a href="https://github.com/Nelsoon056" target="_blank">Nelsoon Sandoval</a></p>

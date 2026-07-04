@@ -1,8 +1,14 @@
 // pa cambiar el tema claro y oscuro
 const botonModo = document.getElementById('boton_modo');
 const texto = document.getElementById('boton_texto');
+const circulo = document.getElementById("circulo");
 
-if (localStorage.getItem('theme') === 'claro') {
+const preferencia = window.matchMedia('(prefers-color-scheme: light)').matches;
+
+if (preferencia) {
+    document.body.classList.add('modo_claro');
+    texto.textContent = "Modo Oscuro";
+} else if (localStorage.getItem('theme') === 'claro') {
     document.body.classList.add('modo_claro');
     texto.textContent = "Modo Oscuro";
 }
@@ -12,23 +18,30 @@ botonModo.addEventListener('click', () => {
 
     if (document.body.classList.contains('modo_claro')) {
         localStorage.setItem('theme', 'claro');
-        texto.textContent = "Modo Oscuro";
+        texto.textContent = "Modo Claro";
+        circulo.classList.add("mover_circulo");
     } else {
         localStorage.setItem('theme', 'oscuro');
-        texto.textContent = "Modo Claro";
+        texto.textContent = "Modo Oscuro";
+        circulo.classList.remove("mover_circulo");
     }
 });
 
 // debounce
 function debounce (callback, retraso) {
     let id;
-    return function(...args) {
+    const ejecutar = function(...args) {
         clearTimeout(id);
 
         id = setTimeout(() => {
             callback(...args);
         }, retraso)
     }
+
+    ejecutar.can = function() {
+        clearTimeout(id);
+    }
+    return ejecutar;
 }
 
 const resultados = document.getElementById('resultados');
@@ -52,8 +65,8 @@ const renderizar = (usuarios) => {
                 <div class="info">
                     <h2>${nombreReal}</h2>
                     <p class="usuario-github">@${perfil.login}</p>
-                    <p><strong>Empresa:</strong> ${empresa}</p>
-                    <p><strong>Repositorios:</strong> ${perfil.public_repos}</p>
+                    <p class="texto"><strong>Empresa:</strong> ${empresa}</p>
+                    <p class="texto"><strong>Repositorios:</strong> ${perfil.public_repos}</p>
                     <a href="${perfil.html_url}" target="_blank" class="boton-perfil">Ver Perfil</a>
                 </div>
             </div>
@@ -98,10 +111,25 @@ async function buscarPerfil (nombre) {
     }
 }
 
-buscar.addEventListener("input", debounce((e) => {
-    const usuario = e.target.value;
+const busqueda = debounce((usuario) => {
     buscarPerfil(usuario);
-}, 500))
+}, 1000);
+
+buscar.addEventListener("input", (e) => {
+    const usuario = e.target.value;
+    busqueda(usuario);
+});
+
+const formulario = document.querySelector('form');
+
+formulario.addEventListener('submit', (e) => {
+    e.preventDefault();
+    busqueda.can(); 
+    buscarPerfil(buscar.value);
+});
 
 
 
+// hay que hacer el estilo de las tarjetas, el responsive de las tarjetas, comentarios explicando las etiquetas, que la pagina lea las preferencias de tema del usuario antes de entrar y tal y editar el readme y desplegar la pagina, el boton de buscar el boton de buscar
+
+// todo listoo
