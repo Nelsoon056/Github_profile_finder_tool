@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="icon" href="assets/icons/search.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
+    <title>Buscador De Perfiles</title>
+</head>
+<body>
+    <header>
+        <div class="contenedor1">
+            <h1>
+                GITHUB PROFILE FINDER
+            </h1>
+            <img src="assets/img/search.png" alt="icono">
+        </div>
+        <div class="contenedor2">
+            <button id="boton_modo">
+                <p id="boton_texto">Modo Claro</p>
+            </button>
+        </div>
+    </header>
+    <main>
+        <h3>Introduce el nombre del perfil a buscar</h3>
+        <form>
+            <input type="text" id="nombre" placeholder="Nelsoon056">
+            <button id="boton_buscar">Buscar</button>
+        </form>
+
+        <div id="loader" style="display: none;">
+            <h4>Buscando usuarios...</h4>
+            <img src="assets/img/gear.png" alt="gear" id="gear" class="rotar">
+        </div>
+        
+        <div id="resultados"></div>
+    </main>
+    <footer>
+        <script src="js/app.js"></script>
+        <p>Página desarrollada por <a href="https://github.com/Nelsoon056" target="_blank">Nelsoon Sandoval</a></p>
+    </footer>
+</body>
+</html>
