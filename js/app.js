@@ -79,6 +79,7 @@ const renderizar = (usuarios) => {
 // obtener los datos de la API
 const buscar = document.getElementById("nombre");
 const botonBuscar = document.getElementById("boton_buscar");
+const errorCon = document.getElementById("error");
 
 async function buscarPerfil (nombre) {
     nombre = nombre.trim();
@@ -87,16 +88,27 @@ async function buscarPerfil (nombre) {
     }
 
     try {
+        errorCon.style.display = 'none';
         loader.style.display = 'flex';
+        resultados.style.display = 'flex';
         resultados.innerHTML = '';
 
         const url = `https://api.github.com/search/users?q=${nombre}&per_page=3`;
         const respuesta = await fetch(url);
+
+        if (respuesta.status == 403 || respuesta.status == 404) {
+            throw new Error("Limite de peticiones alcanzado o no encontrado")
+        }
+
         const datos = await respuesta.json();
         const usuariosRaw = datos.items;
-        
+
         const usuariosCom = usuariosRaw.map(async (usuario) => {
             const res = await fetch(usuario.url);
+
+            if (res.status === 403 || res.status === 404) {
+                throw new Error("Limite de peticiones alcanzado o no encontrado")
+            }
             const perfil = await res.json();
             return perfil; 
         })
@@ -107,7 +119,12 @@ async function buscarPerfil (nombre) {
 
         renderizar(usuariosFin);
     } catch (err) {
-        console.error("Hubo un problema con la petición pibe")
+        console.error(err.message);
+
+        resultados.style.display = 'none';
+        loader.style.display = 'none';
+        errorCon.style.display = 'flex';
+        return;
     }
 }
 

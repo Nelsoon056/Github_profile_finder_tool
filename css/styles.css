@@ -178,7 +178,7 @@ p {
     flex-direction: column;
 }
 
-#loader {
+#loader, #error {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -188,9 +188,16 @@ p {
 h4 {
     color: var(--border);
     letter-spacing: 5px;
+    text-align: center;
 }
 
 #gear {
+    height: 50px;
+    width: 50px;
+    margin: 20px 0 0 0;
+}
+
+#x {
     height: 50px;
     width: 50px;
     margin: 20px 0 0 0;
@@ -259,7 +266,7 @@ strong {
 @media screen and (max-width: 768px) {
     #nombre {
         min-width: 100px;
-        width: 270px;
+        width: 300px;
         max-width: 400px;
     }
     
@@ -269,7 +276,7 @@ strong {
     }
 
     h1 {
-        font-size: 20px;
+        font-size: 19px;
     }
 
     img {
